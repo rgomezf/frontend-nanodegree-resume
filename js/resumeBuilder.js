@@ -5,21 +5,24 @@ var work = {
      "position": "Technology Associate",
      "location": "Boxford, MA, US",
      "dates": "Oct 2015 - Present",
-     "description": "Editing content for clients webpages."
+     "description": "Editing content for clients webpages.",
+     "locUrl": "https://en.wikipedia.org/wiki/Boxford,_Massachusetts"
     },
     {
      "employer": "Envases Antillanos",
      "position": "Software Engineer",
      "location": "Santiago, Santiago, Dom. Rep.",
      "dates": "Sep 2011 - Jul 2015",
-     "description": "Development of applications and reports."
+     "description": "Development of applications and reports.",
+     "locUrl" : "https://en.wikipedia.org/wiki/Santiago_de_los_Caballeros"
     },
     {
      "employer": "Onemax",
      "position": "Information Manager",
      "location": "Santo Domingo, Santo Domingo, Dom. Rep.",
      "dates": "Oct 2010 – Jan 2011",
-     "description": "Development of BI reports."
+     "description": "Development of BI reports.",
+     "locUrl" : "https://en.wikipedia.org/wiki/Santo_Domingo"
      }
    ]
 };
@@ -35,7 +38,6 @@ var projects = {
     ]
 };
 
-
 var bio = {
    "name" : "Ramon Gomez",
    "role" : "Front-Web Developer",
@@ -49,7 +51,8 @@ var bio = {
 
    "skills"  : ["JS", "HTML/CSS", "Bootstrap", "PL/SQL",
               "SQL", "Git/GitHub"],
-   "bioPic" : "images/portfolio.jpg"
+   "bioPic" : "images/portfolio.jpg",
+   "locUrl" : "https://en.wikipedia.org/wiki/Santiago_de_los_Caballeros"
 };
 
 var education = {
@@ -60,7 +63,8 @@ var education = {
       "degree": "BA",
       "major": "CompSci",
       "dates": 1999,
-      "url": "http://www.pucmm.edu.do"
+      "url": "http://www.pucmm.edu.do",
+      "locUrl" : "https://en.wikipedia.org/wiki/Santo_Domingo"
      }
     ],
 
@@ -119,7 +123,7 @@ projects.display = function () {
       $(".project-entry:last").append(formattedpDates);
       $(".project-entry:last").append(formattedpDscr);
 
-      for(img = 0; img < projects.online[prj].images.length; img++) {
+      for(var img = 0; img < projects.online[prj].images.length; img++) {
          var formattedImg = HTMLprojectImage.replace("%data%", projects.online[prj].images[img]);
          $(".project-entry:last").append(formattedImg);
       }
@@ -141,56 +145,55 @@ education.display = function () {
       $(".education-entry:last").append(formattedSDates);
       $(".education-entry:last").append(formattedSLocation);
       $(".education-entry:last").append(formattedMayor);
-    };
+   };
 
-    $(".education-entry:first").append(HTMLonlineClasses);
+   $(".education-entry:first").append(HTMLonlineClasses);
 
-    for(var onC = 0; onC < education.onlineCourses.length; onC++) {
-        var formattedOTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onC].title);
-        var formattedOSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onC].school);
-        var formattedODate = HTMLonlineDates.replace("%data%", education.onlineCourses[onC].dates);
-        var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[onC].url);
-        var formattedOT = formattedOTitle + formattedOSchool;
+   for(var onC = 0; onC < education.onlineCourses.length; onC++) {
+       var formattedOTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onC].title);
+       var formattedOSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onC].school);
+       var formattedODate = HTMLonlineDates.replace("%data%", education.onlineCourses[onC].dates);
+       var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[onC].url);
+       var formattedOT = formattedOTitle + formattedOSchool;
 
-        $(".education-entry:last").append(formattedOT);
-        $(".education-entry:last").append(formattedODate);
-        $(".education-entry:last").append(formattedUrl);
-    };
+       $(".education-entry:last").append(formattedOT);
+       $(".education-entry:last").append(formattedODate);
+       $(".education-entry:last").append(formattedUrl);
+   };
 };
 
 bio.display = function (){
 
-  var formattedName = HTMLheaderName.replace("%data%", bio["name"]);
-  var formattedRole = HTMLheaderRole.replace("%data%", bio["role"]);
-  var formattedPic  = HTMLbioPic.replace("%data%", bio["bioPic"]);
-  var formattedMsg  = HTMLwelcomeMsg.replace("%data%", bio["welcomeMsg"]);
-  var formattedMobile = HTMLmobile.replace("%data%", bio.contacts["mobile"]);
-  var formattedEmail = HTMLemail.replace("%data%", bio.contacts["email"]);
-  var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts["GitHub"]);
-  var formattedLocation = HTMLlocation.replace("%data%", bio.contacts["location"]);
+   var formattedName = HTMLheaderName.replace("%data%", bio["name"]);
+   var formattedRole = HTMLheaderRole.replace("%data%", bio["role"]);
+   var formattedPic  = HTMLbioPic.replace("%data%", bio["bioPic"]);
+   var formattedMsg  = HTMLwelcomeMsg.replace("%data%", bio["welcomeMsg"]);
+   var formattedMobile = HTMLmobile.replace("%data%", bio.contacts["mobile"]);
+   var formattedEmail = HTMLemail.replace("%data%", bio.contacts["email"]);
+   var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts["GitHub"]);
+   var formattedLocation = HTMLlocation.replace("%data%", bio.contacts["location"]);
 
+   $("#topContacts").prepend(formattedLocation);
+   $("#topContacts").prepend(formattedGitHub);
+   $("#topContacts").prepend(formattedEmail);
+   $("#topContacts").prepend(formattedMobile);
+   $("#footerContacts").prepend(formattedLocation);
+   $("#footerContacts").prepend(formattedGitHub);
+   $("#footerContacts").prepend(formattedEmail);
+   $("#footerContacts").prepend(formattedMobile);
+   $("#header").prepend(formattedRole);
+   $("#header").prepend(formattedName);
+   $("#header").append(formattedPic);
+   $("#header").append(bio.welcomeMsg);
 
- $("#topContacts").prepend(formattedLocation);
- $("#topContacts").prepend(formattedGitHub);
- $("#topContacts").prepend(formattedEmail);
- $("#topContacts").prepend(formattedMobile);
- $("#footerContacts").prepend(formattedLocation);
- $("#footerContacts").prepend(formattedGitHub);
- $("#footerContacts").prepend(formattedEmail);
- $("#footerContacts").prepend(formattedMobile);
- $("#header").prepend(formattedRole);
- $("#header").prepend(formattedName);
- $("#header").append(formattedPic);
- $("#header").append(bio.welcomeMsg);
+   if(bio.skills.length > 0) {
+     $("#header").append(HTMLskillsStart);
+   }
 
- if(bio.skills.length > 0) {
-   $("#header").append(HTMLskillsStart);
- }
-
- for(skill = 0; skill < bio.skills.length; skill++) {
-     var formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
-     $("#skills").append(formattedSkills);
- }
+   for(skill = 0; skill < bio.skills.length; skill++) {
+       var formattedSkills = HTMLskills.replace("%data%", bio.skills[skill]);
+       $("#skills").append(formattedSkills);
+   }
 };
 
 bio.display();

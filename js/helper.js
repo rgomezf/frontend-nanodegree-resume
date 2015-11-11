@@ -128,20 +128,24 @@ function initializeMap() {
 
     // initializes an empty array
     var locations = [];
+    var locUrl = [];
 
     // adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
+    locUrl.push(bio.contacts.locUrl);
 
     // iterates through school locations and appends each location to
     // the locations array
     for (var school in education.schools) {
       locations.push(education.schools[school].location);
+      locUrl.push(education.schools[school].locUrl);
     }
 
     // iterates through work locations and appends each location to
     // the locations array
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
+      locUrl.push(work.jobs[job].locUrl);
     }
 
     return locations;
@@ -166,19 +170,27 @@ function initializeMap() {
       position: placeData.geometry.location,
       title: name
     });
-
+    // prueba de contenido
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">'+name+'</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>'+name+'</b>, </b>, .</p>'+
+      '<p>Attribution: '+name+' , <a href="">'+'</a> '+
+      '</p>'+'</div>'+'</div>';
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: contentString
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
-
     // this is where the pin actually gets added to the map.
     // bounds.extend() takes in a map location object
     bounds.extend(new google.maps.LatLng(lat, lon));
